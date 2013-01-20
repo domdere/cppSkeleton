@@ -1,0 +1,1 @@
+#include "appFW/consoleAppMain.hpp"
