@@ -64,7 +64,7 @@ MACRO ( DISPLAY_BOOST_LIB_INFO )
 ENDMACRO ( DISPLAY_BOOST_LIB_INFO )
 
 MACRO ( DISPLAY_POCO_LIB_INFO )
-    IF (Poco_FOUND )
+    IF (POCO_FOUND )
         MESSAGE ( STATUS "Poco includes were found at: ${Poco_INCLUDE_DIR}" )
         MESSAGE ( STATUS "Poco libs were found at: ${Poco_LIBRARY_DIR}" )
         MESSAGE ( STATUS "Poco dynamic libs were found at: ${Poco_BINARY_DIR}" )
@@ -73,16 +73,16 @@ MACRO ( DISPLAY_POCO_LIB_INFO )
         FOREACH ( component ${ARGN} )
             STRING ( TOUPPER ${component} upperComponent )
             
-            IF ( Poco_${upperComponent}_FOUND )
+            IF ( POCO_${upperComponent}_FOUND )
                 MESSAGE ( STATUS "${component} lib found: ${Poco_${upperComponent}_LIBRARY}" )
-            ELSE ( Poco_${upperComponent}_FOUND )
+            ELSE ( POCO_${upperComponent}_FOUND )
                 MESSAGE ( ERROR " ${component} libs NOT found!" )
-            ENDIF ( Poco_${upperComponent}_FOUND )
+            ENDIF ( POCO_${upperComponent}_FOUND )
         ENDFOREACH ( component ${ARGN} )
 
-    ELSE (Poco_FOUND )
-        MESSAGE ( ERROR " Poco libs were NOT found!" )
-    ENDIF (Poco_FOUND )
+    ELSE (POCO_FOUND )
+        MESSAGE ( ERROR " Poco libs were NOT found! Try setting the Env variable POCO_ROOT to the directory containing the include and lib dirs for Poco..." )
+    ENDIF (POCO_FOUND )
 
 ENDMACRO ( DISPLAY_POCO_LIB_INFO )
 
@@ -155,7 +155,9 @@ MESSAGE ( STATUS "Boost: " )
 ADD_DEFINITIONS ( -DBOOST_ALL_NO_LIB )
 
 # want to use static boost libs?
-# SET ( Boost_USE_STATIC_LIBS ON )
+IF (WIN32)
+    SET ( Boost_USE_STATIC_LIBS ON )
+ENDIF (WIN32)
 
 FIND_PACKAGE ( Boost REQUIRED COMPONENTS date_time thread unit_test_framework )
 
@@ -167,7 +169,7 @@ IF ( Boost_FOUND )
 DISPLAY_BOOST_LIB_INFO ( date_time thread unit_test_framework )
 
 ELSE ( Boost_FOUND )
-    MESSAGE ( ERROR "Boost libs were NOT found!" )
+    MESSAGE ( ERROR " Boost libs were NOT found!" )
 ENDIF ( Boost_FOUND )
 
 MESSAGE (STATUS "Poco: " )
@@ -178,7 +180,7 @@ DISPLAY_POCO_LIB_INFO ( XML Net Util Foundation )
 
 MESSAGE ( STATUS "Json Spirit: " )
 
-FIND_PACKAGE (JsonSpirit REQUIRED)
+FIND_PACKAGE ( JsonSpirit )
 
 DISPLAY_JSON_SPIRIT_LIB_INFO ()
 

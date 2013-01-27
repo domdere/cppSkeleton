@@ -23,7 +23,7 @@ FIND_PATH( Json_Spirit_INCLUDE_DIR json_spirit.h
 FIND_PATH( Json_Spirit_LIBRARY_DIR json_spirit
     HINTS
     $ENV{JSONSPIRIT_DIR}
-    PATH_SUFFIXES bin bin/json_spirit
+    PATH_SUFFIXES lib lib/json_spirit lib64 lib64/json_spirit
     PATHS
     /usr/local
     /usr )
@@ -32,11 +32,11 @@ FIND_PATH( Json_Spirit_LIBRARY_DIR json_spirit
 FIND_LIBRARY( Json_Spirit_LIBRARY json_spirit
     HINTS
     $ENV{JSONSPIRIT_DIR}
-    PATH_SUFFIXES bin bin/json_spirit
+    PATH_SUFFIXES lib lib/json_spirit lib64 lib64/json_spirit
     PATHS
     /usr/local
     /usr )
-     
+
 
 INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(Json_Spirit DEFAULT_MSG 
