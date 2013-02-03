@@ -19,21 +19,39 @@ FIND_PATH(PIONNET_INCLUDE_DIR pion/logger.hpp
   /opt
 )
 
-FIND_LIBRARY(PIONNET_LIBRARY
-    NAMES pion-net libpion.a
-    HINTS
-    $ENV{PIONNET_DIR}
-    PATH_SUFFIXES lib64 lib
-    PATHS
-    ~/Library/Frameworks
-    /Library/Frameworks
-    /usr/local
-    /usr
-    /sw
-    /opt/local
-    /opt/csw
-    /opt
-)
+IF ( WIN32 )
+    FIND_LIBRARY ( PIONNET_LIBRARY
+        NAMES pion-net pion.lib
+        HINTS
+        $ENV{PIONNET_DIR}
+        PATH_SUFFIXES lib64 lib
+        PATHS
+        ~/Library/Frameworks
+        /Library/Frameworks
+        /usr/local
+        /usr
+        /sw
+        /opt/local
+        /opt/csw
+        /opt
+    )
+ELSE ( WIN32 )
+    FIND_LIBRARY ( PIONNET_LIBRARY
+        NAMES pion-net libpion.a
+        HINTS
+        $ENV{PIONNET_DIR}
+        PATH_SUFFIXES lib64 lib
+        PATHS
+        ~/Library/Frameworks
+        /Library/Frameworks
+        /usr/local
+        /usr
+        /sw
+        /opt/local
+        /opt/csw
+        /opt
+    )
+ENDIF ( WIN32 )
 
 IF ( PIONNET_DEBUG )
     MESSAGE ( STATUS "Pion library: ${PIONNET_LIBRARY}, Pion Include: ${PIONNET_INCLUDE_DIR}" )
