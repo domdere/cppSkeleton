@@ -1,16 +1,13 @@
 #include "commonUtils/signalHandler.hpp"
 #include "systemLayer/systemLayer.hpp"
 
-#include <sys/types.h>
-
 namespace projectnamespace { namespace systemlayer {
 
 void SystemLayer::SetSignalHandler(commonUtils::SignalHandler& signalHandler)
 {
-    // TODO
 }
 
-boost::uint32_t SystemLayer::GetThreadId() const
+boost::uint32_t SystemLayer::GetThreadId()
 {
     // TODO
     return 0u;
@@ -30,6 +27,5 @@ bool SystemLayer::Shutdown(const boost::program_options::variables_map& commandL
 {
     return true;
 }
-};
 
 }}
