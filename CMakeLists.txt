@@ -124,15 +124,6 @@ MACRO ( DISPLAY_HDF5_LIB_INFO )
 ENDMACRO ( DISPLAY_HDF5_LIB_INFO )
 
 
-MACRO ( DISPLAY_PION_LIB_INFO )
-    IF (PIONNET_FOUND )
-        MESSAGE ( STATUS "Pion includes were found at: " ${PIONNET_INCLUDE_DIR} )
-        MESSAGE ( STATUS "Pion lib(s) found: " ${PIONNET_LIBRARY} )
-    ELSE (PIONNET_FOUND )
-        MESSAGE ( ERROR " Pion libs NOT found!" )
-    ENDIF (PIONNET_FOUND )
-ENDMACRO ( DISPLAY_PION_LIB_INFO )
-
 IF ( WIN32 )
     # need these for windows
     SET (MiscLib winmm.lib comctl32.lib)
@@ -208,12 +199,6 @@ FIND_PACKAGE ( HDF5 REQUIRED )
 
 DISPLAY_HDF5_LIB_INFO ()
 
-MESSAGE ( STATUS "Pion: " )
-
-FIND_PACKAGE ( PionNet REQUIRED )
-
-DISPLAY_PION_LIB_INFO ()
-
 # Main include directories:
 INCLUDE_DIRECTORIES (
     ${ROOT_SRC_DIR}
@@ -222,8 +207,7 @@ INCLUDE_DIRECTORIES (
     ${Json_Spirit_INCLUDE_DIR}
     ${SOCI_INCLUDE_DIR}
     ${LOG4CPLUS_INCLUDE_DIR}
-    ${HDF5_INCLUDE_DIR}
-    ${PIONNET_INCLUDE_DIR} )
+    ${HDF5_INCLUDE_DIR} )
 
 # I don't include ${Poco_BINARY_DIR} in the link directories because on linux it seems to get set
 # to the include dir...
