@@ -3,7 +3,7 @@
  * startup and shutdown.
  **/
 
-#include "systemLayer/baseSystemLayer.hpp"
+#include "commonSystemInit/commonSystemInit.hpp"
 
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.hpp>
@@ -13,11 +13,11 @@
 
 namespace projectnamespace { namespace systemlayer {
 
-BaseSystemLayer::BaseSystemLayer(const std::string& appName)
+CommonSystemInit::CommonSystemInit(const std::string& appName)
 :
     mCommandLineOptions(appName)    
 
-int BaseSystemLayer::Main(int argc, char** argv)
+int CommonSystemInit::Main(int argc, char** argv)
 {
     PopulateCommandLineOptions();    
 
@@ -51,26 +51,26 @@ int BaseSystemLayer::Main(int argc, char** argv)
     return 0;
 }
 
-void BaseSystemLayer::SetSignalHandler(commonUtils::SignalHandler& signalHandler)
+void CommonSystemInit::SetSignalHandler(commonUtils::SignalHandler& signalHandler)
 {
 }
 
-boost::uint32_t BaseSystemLayer::GetThreadId() const
+boost::uint32_t CommonSystemInit::GetThreadId() const
 {
 }
 
-void BaseSystemLayer::PopulateCommandLineOptions()
+void CommonSystemInit::PopulateCommandLineOptions()
 {
 }
 
 // logging is a non-platform specific system that all applications will expect
 // to be setup..
-void BaseSystemLayer::InitialiseLoggingSystem()
+void CommonSystemInit::InitialiseLoggingSystem()
 {
     log4cplus::BasicConfigurator configurator;
     configurator.configure();
 
-    log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("BaseSystemLayer"));
+    log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("CommonSystemInit"));
     LOG4CPLUS_INFO(logger, LOG4CPLUS_TEXT("Logging system initialised...")); 
 }
 
