@@ -1,7 +1,7 @@
 #include "commonUtils/signalHandler.hpp"
 #include "systemLayer/systemLayer.hpp"
 
-#include <sys/types.h>
+#include <pthread.h>
 
 namespace projectnamespace { namespace systemlayer {
 
@@ -9,9 +9,9 @@ void SystemLayer::SetSignalHandler(commonUtils::SignalHandler& signalHandler)
 {
 }
 
-boost::uint32_t SystemLayer::GetThreadId() const
+boost::uint32_t SystemLayer::GetThreadId()
 {
-    return gettid();
+    return pthread_self();
 }
 
 bool SystemLayer::Init(const boost::program_options::variables_map& commandLineParams)
@@ -28,6 +28,5 @@ bool SystemLayer::Shutdown(const boost::program_options::variables_map& commandL
 {
     return true;
 }
-};
 
 }}

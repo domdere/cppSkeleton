@@ -1,13 +1,11 @@
 #ifndef SIGNAL_HANDLER_HPP__
 #define SIGNAL_HANDLER_HPP__
 
-#include "commonUtils/singleton.hpp"
-
 #include <boost/function.hpp>
 
 namespace projectname { namespace commonutils {
 
-class SignalHandler : public Singleton<SignalHandler> 
+class SignalHandler 
 {
 public:
     typedef boost::function<void (int)> ResetSignalCallback;
@@ -29,7 +27,7 @@ public:
 private:
     ResetSignalCallback mResetSignalHandler;
     SignalToStringConversionCallback mSignalToString;
-}
+};
 
 }}
 

@@ -7,6 +7,14 @@
  * Depending on the system you are building on, cmake will select different implementations of this header to link in
  **/
 
+namespace boost
+{
+    namespace program_options
+    {
+        class variables_map;
+    }
+}
+
 namespace projectnamespace { namespace systemlayer {
 
 namespace commonUtils
@@ -19,7 +27,7 @@ class SystemLayer
 public:
     static void SetSignalHandler(commonUtils::SignalHandler& signalHandler);
 
-    static boost::uint32_t GetThreadId() const;
+    static boost::uint32_t GetThreadId();
 
 private:
 
