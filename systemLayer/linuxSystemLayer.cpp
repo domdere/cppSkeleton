@@ -1,4 +1,4 @@
-#pragma once
+#include "commonUtils/signalHandler.hpp"
 #include "systemLayer/systemLayer.hpp"
 
 #include <sys/types.h>

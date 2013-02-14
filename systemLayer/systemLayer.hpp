@@ -9,6 +9,11 @@
 
 namespace projectnamespace { namespace systemlayer {
 
+namespace commonUtils
+{
+    class SignalHandler;
+}
+
 class SystemLayer
 {
 public:

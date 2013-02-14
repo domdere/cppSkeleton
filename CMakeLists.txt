@@ -220,5 +220,7 @@ INCLUDE_DIRECTORIES (
 
 # Sub Projects:
 ADD_SUBPROJECT(appFW)
+ADD_SUBPROJECT(commonUtils)
 ADD_SUBPROJECT(sampleBinaryProject)
+ADD_SUBPROJECT(systemLayer)
 

@@ -1,4 +1,4 @@
-#pragma once
+#include "commonUtils/signalHandler.hpp"
 #include "systemLayer/systemLayer.hpp"
 
 #include <sys/types.h>
@@ -7,11 +7,13 @@ namespace projectnamespace { namespace systemlayer {
 
 void SystemLayer::SetSignalHandler(commonUtils::SignalHandler& signalHandler)
 {
+    // TODO
 }
 
 boost::uint32_t SystemLayer::GetThreadId() const
 {
-    return gettid();
+    // TODO
+    return 0u;
 }
 
 bool SystemLayer::Init(const boost::program_options::variables_map& commandLineParams)
