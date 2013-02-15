@@ -5,8 +5,6 @@
  * startup and shutdown.
  **/
 
-#include "commonUtils/ISystemLayer.hpp"
-
 #include <boost/program_options.hpp>
 
 namespace boost
@@ -17,25 +15,21 @@ namespace boost
     }
 };
 
-namespace projectnamespace { namespace commonSystemInit {
+namespace projectnamespace { namespace commonAppInit {
 
-class CommonSystemInit
+class CommonAppInit
 {
 public:
-    static CommonSystemInit(
-        const std::string& appName, 
-        boost::program_options::options_description& options);
+    static int Main(const boost::program_options::variables_map& commandLineArgs);
 
-    static int Main(int argc, char** argv);
-
-private:
     // set up the command-line options to be used by the application.
     static void PopulateCommandLineOptions(
         boost::program_options::options_description& options);
     
+private:
     // logging is a non-platform specific system that all applications will expect
     // to be setup..
-    static void InitialiseLoggingSystem();
+    static void InitialiseLoggingSystem(const boost::program_options::variables_map& commandLineArgs);
 
     static bool StartUpAppLayer(const boost::program_options::variables_map& commandLineParams);
 

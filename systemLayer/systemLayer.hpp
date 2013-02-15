@@ -7,6 +7,8 @@
  * Depending on the system you are building on, cmake will select different implementations of this header to link in
  **/
 
+#include <boost/cstdint.hpp>
+
 namespace boost
 {
     namespace program_options

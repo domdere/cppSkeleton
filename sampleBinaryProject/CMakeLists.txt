@@ -8,4 +8,5 @@ ADD_EXECUTABLE ( sampleBinaryProject
 # or any other lib targets within the main project that need to be built
 # and linked in.
 TARGET_LINK_LIBRARIES ( sampleBinaryProject
-    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
+    commonAppInit
+    ${Boost_PROGRAM_OPTIONS_LIBRARY} )

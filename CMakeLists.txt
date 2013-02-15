@@ -150,14 +150,14 @@ IF (WIN32)
     SET ( Boost_USE_STATIC_LIBS ON )
 ENDIF (WIN32)
 
-FIND_PACKAGE ( Boost REQUIRED COMPONENTS date_time thread unit_test_framework )
+FIND_PACKAGE ( Boost REQUIRED COMPONENTS date_time thread unit_test_framework program_options)
 
 IF ( Boost_FOUND )
     MESSAGE ( STATUS "Boost includes were found at: ${Boost_INCLUDE_DIR}" )
     MESSAGE ( STATUS "Boost libs were found at: ${Boost_LIBRARY_DIRS}" )
     MESSAGE ( STATUS "" )
 
-DISPLAY_BOOST_LIB_INFO ( date_time thread unit_test_framework )
+DISPLAY_BOOST_LIB_INFO ( date_time thread unit_test_framework program_options )
 
 ELSE ( Boost_FOUND )
     MESSAGE ( ERROR " Boost libs were NOT found!" )
@@ -221,6 +221,7 @@ INCLUDE_DIRECTORIES (
 # Sub Projects:
 ADD_SUBPROJECT(appFW)
 ADD_SUBPROJECT(commonUtils)
+ADD_SUBPROJECT(commonAppInit)
 ADD_SUBPROJECT(sampleBinaryProject)
 ADD_SUBPROJECT(systemLayer)
 
