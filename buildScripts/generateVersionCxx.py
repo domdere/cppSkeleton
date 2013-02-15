@@ -2,6 +2,8 @@
 
 from optparse import OptionParser, OptionGroup
 
+import subprocess
+
 def versionString():
     return '1.0'
 
@@ -15,12 +17,15 @@ def usageString():
 def setopts():
     parser = OptionParser(usage=usageString(), version=versionString())
 
+    parser.add_option('-v', '--verbose', action='store_true', dest='verbose', default=False,
+        help='Verbose output')
+
     repoVersioningOptions = OptionGroup(
         parser,
         "Repo and Source control options",
         "Allows you to specify information required for embedding version info about your app")
 
-    repoVersioningOptions.add_option('--git', type='string', dest='gitinfo', default='', nargs=2,
+    repoVersioningOptions.add_option('--git', type='string', dest='gitinfo', nargs=2,
         help='Info for getting the git versioning info, where GITEXE is the path to the git binary \
 and REPO_PATH is the path to the repo from which the build is being made, if nothing is provided it will skip the git versioning',
         metavar='\"GITEXE REPO_PATH\"')
@@ -77,7 +82,11 @@ def main():
 
     outputFilename = args[0]
 
-    versionInfo
+    if options.gitinfo != None:
+        revId = subprocess.check_output([options.gitinfo[0], 'rev-parse', 'HEAD'], cwd=options.gitinfo[1])
+        
+        if options.verbose:
+            print("Git Revid: %s" % (revId))
 
     return
 
