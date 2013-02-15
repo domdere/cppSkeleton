@@ -2,14 +2,19 @@ An empty project for starting a Cpp project from.
 
 Comes with the following requirements (each can be removed to your taste).
 
-(installation instructions provided below)
+(installation instructions provided below for libraries)
 
-Boost
-HDF5
-json_spirit
-log4cplus
-soci
-Poco
+Libraries:
+    Boost
+    HDF5
+    json_spirit
+    log4cplus
+    soci
+    Poco
+
+Apps/Executables:
+    Python: Build system uses python to generate some of the codegen output
+    Git: Versioning by default embeds Git version information from the repo you are building from
 
 -----
 Boost

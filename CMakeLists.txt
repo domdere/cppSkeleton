@@ -133,6 +133,13 @@ MACRO ( DISPLAY_PYTHON_INTERP_INFO )
 
 ENDMACRO ( DISPLAY_PYTHON_INTERP_INFO )
 
+MACRO (DISPLAY_GIT_INFO )
+    IF ( GIT_FOUND )
+        MESSAGE ( STATUS "Git Vers.${GIT_VERSION_STRING} was found at: ${GIT_EXECUTABLE}" )
+    ELSE ( GIT_FOUND )
+        MESSAGE ( ERROR "Git was not found, its required for versioning" )
+    ENDIF ( GIT_FOUND )
+ENDMACRO (DISPLAY_GIT_INFO )
 
 IF ( WIN32 )
     # need these for windows
@@ -212,6 +219,16 @@ DISPLAY_HDF5_LIB_INFO ()
 FIND_PACKAGE ( PythonInterp )
 
 DISPLAY_PYTHON_INTERP_INFO ()
+
+OPTION ( USE_GIT_FOR_VERSIONING "Set to true if building from a Git repo so git versioning info can be provided, switch off if building from an exported archive" ON)
+
+IF ( USE_GIT_FOR_VERSIONING )
+    FIND_PACKAGE( Git )
+    
+    # I'll leave the macro in just in case, but the find package for git actually displays the same info
+    # macro below displays...
+    #DISPLAY_GIT_INFO()
+ENDIF ( USE_GIT_FOR_VERSIONING )
 
 # Main include directories:
 INCLUDE_DIRECTORIES (
