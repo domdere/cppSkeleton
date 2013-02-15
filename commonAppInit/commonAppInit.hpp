@@ -25,6 +25,12 @@ public:
     // set up the command-line options to be used by the application.
     static void PopulateCommandLineOptions(
         boost::program_options::options_description& options);
+
+    /// @brief primarily for the --help and --version options.
+    /// @return true if the program should continue execution, false otherwise
+    static bool HandleCommonOptions(
+        const boost::program_options::options_description& options, 
+        const boost::program_options::variables_map& vm);
     
 private:
     // logging is a non-platform specific system that all applications will expect

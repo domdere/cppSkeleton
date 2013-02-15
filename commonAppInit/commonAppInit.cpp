@@ -50,6 +50,19 @@ void CommonAppInit::PopulateCommandLineOptions(
         ("help", "print this help message and exit."); 
 }
 
+bool CommonAppInit::HandleCommonOptions(
+    const boost::program_options::options_description& options, 
+    const boost::program_options::variables_map& vm)
+{
+    if (vm.count("help"))
+    {
+        std::cout << options << '\n';
+        return false;
+    }
+
+    return true;
+}
+
 // logging is a non-platform specific system that all applications will expect
 // to be setup..
 void CommonAppInit::InitialiseLoggingSystem(

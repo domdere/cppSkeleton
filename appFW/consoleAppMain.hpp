@@ -43,6 +43,10 @@ int main(int argc, char** argv)
 
     po::notify(vm);
 
+    if (!ns::commonAppInit::CommonAppInit::HandleCommonOptions(options, vm))
+    {
+        return 0;
+    }
 
     ns::AppMain(argc, argv);
 }
