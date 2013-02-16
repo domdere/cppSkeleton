@@ -3,6 +3,8 @@
 from optparse import OptionParser, OptionGroup
 
 import subprocess
+#regex
+import re
 
 def versionString():
     return '1.0'
@@ -65,7 +67,9 @@ and REPO_PATH is the path to the repo from which the build is being made, if not
 
     miscOpts = OptionGroup(parser, "Miscellaneous Options")
 
-    miscOpts.add_option
+    miscOpts.add_option('--namespace', type='string', dest='namespace', default='projectnamespace',
+        help='The namespace to put the versioning stuff in [default=\'%default\']',
+        metavar='namespace')
 
     parser.add_option_group(miscOpts)
 
@@ -83,10 +87,32 @@ def main():
     outputFilename = args[0]
 
     if options.gitinfo != None:
+        # NOTE (Dom De Re): interested in getting the:
+        #   git revId
+        #   git branch name
+        #   git user who did the build.
+        #   git remote? (I'm thinking no since its so common for there to be multiple
+        #       remotes)
         revId = subprocess.check_output([options.gitinfo[0], 'rev-parse', 'HEAD'], cwd=options.gitinfo[1])
+        buildUser = subprocess.check_output(
+            [options.gitinfo[0], 'config', '--global', 'user.name'], 
+            cwd=options.gitinfo[1]) 
+
+        currentBranchRegex = re.compile(r'^\* ')
         
+        gitBranchOutput = subprocess.check_output(
+            [options.gitinfo[0], 'branch'],
+            cwd=options.gitinfo[1])
+
+        buildBranch = ''
+        for line in gitBranchOutput.split('\n'):
+            matchResult = currentBranchRegex.match(line)
+            if matchResult != None:
+                # slice the matching part of the string off.
+                buildBranch = line[matchResult.end():]
+
         if options.verbose:
-            print("Git Revid: %s" % (revId))
+            print("Git Revid: %s\nGit Build User: %s\nGit branch: %s" % (revId, buildUser, buildBranch))
 
     return
 
