@@ -87,10 +87,10 @@ def main():
     outputFilename = args[0]
 
     if options.gitinfo != None:
-        # NOTE (Dom De Re): interested in getting the:
-        #   git revId
-        #   git branch name
-        #   git user who did the build.
+        # NOTE (Dom De Re): interested in getting the (the ones with the '*' beside them are checked off):
+        #   git revId *
+        #   git branch name *
+        #   git user who did the build *
         #   git remote? (I'm thinking no since its so common for there to be multiple
         #       remotes)
         revId = subprocess.check_output([options.gitinfo[0], 'rev-parse', 'HEAD'], cwd=options.gitinfo[1])
