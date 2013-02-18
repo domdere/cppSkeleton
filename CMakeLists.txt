@@ -120,6 +120,7 @@ ENDMACRO ( DISPLAY_LOG4CPLUS_LIB_INFO )
 
 MACRO ( DISPLAY_HDF5_LIB_INFO )
     IF (HDF5_FOUND )
+        MESSAGE ( STATUS "Hdf5 version: " ${HDF5_VERSION} )
         MESSAGE ( STATUS "Hdf5 includes were found at: " ${HDF5_INCLUDE_DIR} )
         MESSAGE ( STATUS "Hdf5 lib(s) found: " ${HDF5_LIBRARIES} )
     ELSE (HDF5_FOUND )

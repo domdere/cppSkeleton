@@ -6,7 +6,7 @@ ADD_CUSTOM_COMMAND (
     ARGS "${ROOT_SRC_DIR}/buildScripts/generateVersionCxx.py" 
         "--git ${GIT_EXECUTABLE} ${ROOT_SRC_DIR}"
         "--boost ${Boost_VERSION}"
-        "--hdf5 Unknown"
+        "--hdf5 ${HDF5_VERSION}"
         "--json_spirit ${Json_Spirit_VERSION}"
         "--log4cplus ${LOG4CPLUS_VERSION}"
         "--soci ${SOCI_VERSION_STRING}"
