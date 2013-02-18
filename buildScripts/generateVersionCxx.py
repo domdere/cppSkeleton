@@ -39,27 +39,27 @@ and REPO_PATH is the path to the repo from which the build is being made, if not
         "External Libs",
         "Allows you to specify version numbers for external libraries that were built separately")
 
-    externalLibs.add_option("--boost", type='string', dest='boostversion', default='',
+    externalLibs.add_option("--boost", type='string', dest='boostversion',
         help='Boost version.  Library providing a wide set of functionality to C++, http://www.boost.org/',
         metavar='VERSION')
     
-    externalLibs.add_option("--hdf5", type='string', dest='hdf5version', default='',
+    externalLibs.add_option("--hdf5", type='string', dest='hdf5version',
         help='HDF5 version.  Library that helps read and write to and from hdf5 files, a format that provides fast lookup to large collections of data, http://www.hdfgroup.org/HDF5/',
         metavar='VERSION')
 
-    externalLibs.add_option("--json_spirit", type='string', dest='jsonspiritversion', default='',
+    externalLibs.add_option("--json_spirit", type='string', dest='jsonspiritversion',
         help='Json Spirit version.  Library built on top of the Boost Spirit library providing the ability to build and parse JSON objects to and from strings',
         metavar='VERSION')
     
-    externalLibs.add_option("--log4cplus", type='string', dest='log4cplusversion', default='',
+    externalLibs.add_option("--log4cplus", type='string', dest='log4cplusversion',
         help='Log4Cplus.  Logging library, http://log4cplus.sourceforge.net/',
         metavar='VERSION')
     
-    externalLibs.add_option("--soci", type='string', dest='sociversion', default='',
+    externalLibs.add_option("--soci", type='string', dest='sociversion',
             help='Soci version.  Library providing database access functionality, http://soci.sourceforge.net',
         metavar='VERSION')
     
-    externalLibs.add_option("--poco", type='string', dest='pocoversion', default='',
+    externalLibs.add_option("--poco", type='string', dest='pocoversion',
         help='Poco version.  Library providing a wide set of networking functionality (e.g socket wrappers and http servers and clients) to C++, http://pocoproject.org',
         metavar='VERSION')
     
@@ -75,6 +75,48 @@ and REPO_PATH is the path to the repo from which the build is being made, if not
 
     return parser
 
+def buildVersionString(
+    gitRevId,
+    gitBranch,
+    gitBuildUser,
+    boostVersion,
+    hdf5Version,
+    jsonSpiritVersion,
+    log4cplusVersion,
+    sociVersion,
+    pocoVersion):
+
+    border = '-' * 57 + '\n'
+
+    result = ''
+
+    if gitRevId != None and gitBranch != None and gitBuildUser != None:
+        result += 'Git Revision Id: ' + gitRevId + '\n'
+        result += 'Git Build Branch: ' + gitBranch + '\n'
+        result += 'Git Build User: ' + gitBuildUser + '\n'
+
+    if boostVersion != None:
+        result += 'Boost Version: ' + boostVersion + '\n'
+
+    if hdf5Version != None:
+        result += 'HDF5 Version: ' + hdf5Version + '\n'
+
+    if jsonSpiritVersion != None:
+        result += 'Json Spirit Version: ' + jsonSpiritVersion + '\n'
+
+    if log4cplusVersion != None:
+        result += 'Log4cplus Version: ' + log4cplusVersion + '\n'
+
+    if sociVersion != None:
+        result += 'Soci Version: ' + sociVersion + '\n'
+
+    if pocoVersion != None:
+        result += 'Poco Version: ' + pocoVersion + '\n'
+
+    result = border + result + border
+
+    return result
+
 def main():
 
     parser = setopts()
@@ -86,6 +128,10 @@ def main():
 
     outputFilename = args[0]
 
+    revId = None
+    buildUser = None
+    buildBranch = None
+
     if options.gitinfo != None:
         # NOTE (Dom De Re): interested in getting the (the ones with the '*' beside them are checked off):
         #   git revId *
@@ -93,10 +139,12 @@ def main():
         #   git user who did the build *
         #   git remote? (I'm thinking no since its so common for there to be multiple
         #       remotes)
-        revId = subprocess.check_output([options.gitinfo[0], 'rev-parse', 'HEAD'], cwd=options.gitinfo[1])
+        revId = subprocess.check_output([options.gitinfo[0], 'rev-parse', 'HEAD'], cwd=options.gitinfo[1])[0:-1]
+
+        # cut off the trailing '\n'
         buildUser = subprocess.check_output(
             [options.gitinfo[0], 'config', '--global', 'user.name'], 
-            cwd=options.gitinfo[1]) 
+            cwd=options.gitinfo[1])[0:-1] 
 
         currentBranchRegex = re.compile(r'^\* ')
         
@@ -104,15 +152,23 @@ def main():
             [options.gitinfo[0], 'branch'],
             cwd=options.gitinfo[1])
 
-        buildBranch = ''
         for line in gitBranchOutput.split('\n'):
             matchResult = currentBranchRegex.match(line)
             if matchResult != None:
                 # slice the matching part of the string off.
                 buildBranch = line[matchResult.end():]
+                break
 
-        if options.verbose:
-            print("Git Revid: %s\nGit Build User: %s\nGit branch: %s" % (revId, buildUser, buildBranch))
+    print(buildVersionString(
+        revId,
+        buildBranch,
+        buildUser,
+        options.boostversion,
+        options.hdf5version,
+        options.jsonspiritversion,
+        options.log4cplusversion,
+        options.sociversion,
+        options.pocoversion)) 
 
     return
 
