@@ -4,6 +4,7 @@
 #  Json_Spirit_INCLUDE_DIR
 #  Json_Spirit_LIBRARY_DIR
 #  Json_Spirit_LIBRARY
+#  Json_Spirit_VERSION
 
 
 OPTION ( JSON_SPIRIT_DEBUG "Debug mode for Json spirit find package" OFF )
@@ -25,6 +26,22 @@ FIND_PATH( Json_Spirit_INCLUDE_DIR json_spirit.h
     /opt/local # DarwinPorts
     /opt/csw # Blastwave
     /opt )
+
+# determine the version:
+
+SET ( Json_Spirit_VERSION 0 )
+
+# the guy just whacks the version in comment in the header file...
+FILE ( STRINGS "${Json_Spirit_INCLUDE_DIR}/json_spirit.h" JSON_SPIRIT_H_CONTENTS REGEX ".*json spirit version" )
+
+IF ( JSON_SPIRIT_DEBUG )
+    MESSAGE ( STATUS "[${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE}]: looking for Json Spirit version in ${Json_Spirit_INCLUDE_DIR}/json_spirit.h" )
+    MESSAGE ( STATUS "[${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE}]: ${Json_Spirit_INCLUDE_DIR}/json_spirit.h contents: ${JSON_SPIRIT_H_CONTENTS}" )
+ENDIF ( JSON_SPIRIT_DEBUG )
+
+STRING ( REGEX REPLACE ".*json spirit version ([0-9.]+).*" "\\1" Json_Spirit_VERSION "${JSON_SPIRIT_H_CONTENTS}")
+
+SET (Json_Spirit_VERSION ${Json_Spirit_VERSION} CACHE INTERNAL "The version number for the Json Spirit Libraries" )
 
 # right now its only geared towards the common linux distros...
 
@@ -68,6 +85,7 @@ INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(Json_Spirit DEFAULT_MSG 
 	Json_Spirit_INCLUDE_DIR 
     Json_Spirit_LIBRARY_DIR 
-    Json_Spirit_LIBRARY )
+    Json_Spirit_LIBRARY 
+    Json_Spirit_VERSION )
 
 MARK_AS_ADVANCED(Json_Spirit_INCLUDE_DIR)
