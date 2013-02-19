@@ -172,6 +172,10 @@ IF (WIN32)
     SET ( Boost_USE_STATIC_LIBS ON )
 ENDIF (WIN32)
 
+IF ( CMAKE_COMPILER_IS_GNUCXX )
+    SET ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall" )
+ENDIF ( CMAKE_COMPILER_IS_GNUCXX )
+
 FIND_PACKAGE ( Boost REQUIRED COMPONENTS date_time thread unit_test_framework program_options)
 
 IF ( Boost_FOUND )
@@ -238,6 +242,7 @@ ENDIF ( USE_GIT_FOR_VERSIONING )
 # Main include directories:
 INCLUDE_DIRECTORIES (
     ${ROOT_SRC_DIR}
+    ${ROOT_BIN_DIR}
     ${Boost_INCLUDE_DIR}
     ${Poco_INCLUDE_DIR}
     ${Json_Spirit_INCLUDE_DIR}
@@ -260,4 +265,5 @@ ADD_SUBPROJECT(commonUtils)
 ADD_SUBPROJECT(commonAppInit)
 ADD_SUBPROJECT(sampleBinaryProject)
 ADD_SUBPROJECT(systemLayer)
+ADD_SUBPROJECT(versioning)
 

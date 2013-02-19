@@ -4,6 +4,7 @@
  **/
 
 #include "commonAppInit/commonAppInit.hpp"
+#include "versioning/version.hxx"
 
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
@@ -47,7 +48,8 @@ void CommonAppInit::PopulateCommandLineOptions(
     boost::program_options::options_description& options)
 {
     options.add_options()
-        ("help", "print this help message and exit."); 
+        ("help", "print this help message and exit.") 
+        ("version", "print the versioning info and then exit."); 
 }
 
 bool CommonAppInit::HandleCommonOptions(
@@ -57,6 +59,12 @@ bool CommonAppInit::HandleCommonOptions(
     if (vm.count("help"))
     {
         std::cout << options << '\n';
+        return false;
+    }
+
+    if (vm.count("version"))
+    {
+        std::cout << version::VersionInfo::GetVersionString();
         return false;
     }
 
