@@ -90,7 +90,7 @@ IF ( Poco_DEBUG )
     MESSAGE ( STATUS "[${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE}]: looking for Poco version in ${Poco_INCLUDE_DIR}/Poco/Version.h (contents: ${POCO_VERSION_H_CONTENTS})" )
 ENDIF ( Poco_DEBUG )
 
-STRING ( REGEX REPLACE ".*#define POCO_VERSION 0x([0-9]+).*" "\\1" Poco_VERSION "${POCO_VERSION_H_CONTENTS}")
+STRING ( REGEX REPLACE ".*#define POCO_VERSION[^0-9]*0x([0-9]+).*" "\\1" Poco_VERSION "${POCO_VERSION_H_CONTENTS}")
 
 SET (Poco_VERSION ${Poco_VERSION} CACHE INTERNAL "The version number for the Poco Libraries" )
 

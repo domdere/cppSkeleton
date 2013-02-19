@@ -39,7 +39,7 @@ IF ( JSON_SPIRIT_DEBUG )
     MESSAGE ( STATUS "[${CMAKE_CURRENT_LIST_FILE}:${CMAKE_CURRENT_LIST_LINE}]: ${Json_Spirit_INCLUDE_DIR}/json_spirit.h contents: ${JSON_SPIRIT_H_CONTENTS}" )
 ENDIF ( JSON_SPIRIT_DEBUG )
 
-STRING ( REGEX REPLACE ".*json spirit version ([0-9.]+).*" "\\1" Json_Spirit_VERSION "${JSON_SPIRIT_H_CONTENTS}")
+STRING ( REGEX REPLACE ".*json spirit version[^0-9]*([0-9.]+).*" "\\1" Json_Spirit_VERSION "${JSON_SPIRIT_H_CONTENTS}")
 
 SET (Json_Spirit_VERSION ${Json_Spirit_VERSION} CACHE INTERNAL "The version number for the Json Spirit Libraries" )
 
