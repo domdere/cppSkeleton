@@ -1,14 +1,37 @@
 # Locate HDF5 library
 # This module defines
 #  HDF5_FOUND, if false, do not try to link to HDF5
+#  HDF5_HL_FOUND, if false, do not try to link to HDF5
 #  HDF5_LIBRARIES
 #  HDF5_INCLUDE_DIR, where to find h5cpp.h
 
-IF(MSVC)
+IF ( MSVC )
+    SET ( HDF5_LIB_NAME "hdf5dll" )
+    SET ( HDF5_DEBUG_LIB_NAME "hdf5ddll" )
 
-  FIND_PATH(HDF5_INCLUDE_DIR cpp/h5cpp.h
+# haven't tried the HL lib in windows yet, not sure if these names are correct...
+    SET ( HDF5_HL_LIB_NAME "hdf5hldll" )
+    SET ( HDF5_HL_DEBUG_LIB_NAME "hdf5hlddll" )
+ELSE ( MSVC )
+    SET ( HDF5_LIB_NAME "hdf5" )
+    SET ( HDF5_DEBUG_LIB_NAME "hdf5" )
+
+    SET ( HDF5_HL_LIB_NAME "hdf5_hl" )
+    SET ( HDF5_HL_DEBUG_LIB_NAME "hdf5_hl" )
+ENDIF ( MSVC )
+
+IF ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+    SET ( HDF5_LIB_USED "${HDF5_DEBUG_LIB_NAME}" )
+    SET ( HDF5_HL_LIB_USED "${HDF5_HL_DEBUG_LIB_NAME}" )
+ELSE ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+    SET ( HDF5_LIB_USED "${HDF5_LIB_NAME}" )
+    SET ( HDF5_HL_LIB_USED "${HDF5_HL_LIB_NAME}" )
+ENDIF ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+
+FIND_PATH(HDF5_INCLUDE_DIR H5public.h
     HINTS
-    $ENV{HDF5_DIR}
+        $ENV{HDF5_DIR}
+        ${HDF5_DIR}
     PATH_SUFFIXES include
     PATHS
     ~/Library/Frameworks
@@ -19,136 +42,85 @@ IF(MSVC)
     /opt/local # DarwinPorts
     /opt/csw # Blastwave
     /opt
-  )
-
-
-  FIND_LIBRARY(HDF5_LIBRARY
-    NAMES hdf5dll.lib
-    HINTS
-    $ENV{HDF5_DIR}
-    PATH_SUFFIXES lib64 lib
-    PATHS
-    ~/Library/Frameworks
-    /Library/Frameworks
-    /usr/local
-    /usr
-    /sw
-    /opt/local
-    /opt/csw
-    /opt
-  )
-
-  FIND_LIBRARY(HDF5_CPP_LIBRARY
-    NAMES hdf5_cppdll.lib
-    HINTS
-    $ENV{HDF5_DIR}
-    PATH_SUFFIXES lib64 lib
-    PATHS
-    ~/Library/Frameworks
-    /Library/Frameworks
-    /usr/local
-    /usr
-    /sw
-    /opt/local
-    /opt/csw
-    /opt
-  )
-
-ELSE(MSVC)
-
-  FIND_PATH(HDF5_INCLUDE_DIR cpp/H5Cpp.h
-    HINTS
-    $ENV{HDF5_DIR}
-    PATH_SUFFIXES include
-    PATHS
-    ~/Library/Frameworks
-    /Library/Frameworks
-    /usr/local
-    /usr
-    /sw # Fink
-    /opt/local # DarwinPorts
-    /opt/csw # Blastwave
-    /opt
-  )
-
-  FIND_LIBRARY(HDF5_LIBRARY
-    NAMES hdf5
-    HINTS
-    $ENV{HDF5_DIR}
-    PATH_SUFFIXES lib64 lib
-    PATHS
-    ~/Library/Frameworks
-    /Library/Frameworks
-    /usr/local
-    /usr
-    /sw
-    /opt/local
-    /opt/csw
-    /opt
-  )
-
-  FIND_LIBRARY(HDF5_CPP_LIBRARY
-    NAMES hdf5_cpp
-    HINTS
-    $ENV{HDF5_DIR}
-    PATH_SUFFIXES lib64 lib
-    PATHS
-    ~/Library/Frameworks
-    /Library/Frameworks
-    /usr/local
-    /usr
-    /sw
-    /opt/local
-    /opt/csw
-    /opt
-  )
-
-ENDIF(MSVC)
-
-IF(MSVC)
-  FIND_LIBRARY(HDF5_DEBUG_LIBRARY
-    NAMES hdf5ddll
-    HINTS
-    $ENV{HDF5_DIR}
-    PATH_SUFFIXES lib64 lib
-    PATHS
-    ~/Library/Frameworks
-    /Library/Frameworks
-    /usr/local
-    /usr
-    /sw
-    /opt/local
-    /opt/csw
-    /opt
-  )
-
-FIND_LIBRARY(HDF5_CPP_DEBUG_LIBRARY
-  NAMES hdf5_cppddll
-  HINTS
-  $ENV{HDF5_DIR}
-  PATH_SUFFIXES lib64 lib
-  PATHS
-  ~/Library/Frameworks
-  /Library/Frameworks
-  /usr/local
-  /usr
-  /sw
-  /opt/local
-  /opt/csw
-  /opt
 )
-ELSE(MSVC)
-  SET(HDF5_DEBUG_LIBRARY ${HDF5_LIBRARY})
-  SET(HDF5_CPP_DEBUG_LIBRARY ${HDF5_CPP_LIBRARY})
-ENDIF(MSVC)
+
+
+FIND_LIBRARY(HDF5_LIBRARY
+    NAMES ${HDF5_LIB_NAME}
+    HINTS
+        $ENV{HDF5_DIR}
+        ${HDF5_DIR}
+    PATH_SUFFIXES lib64 lib
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /usr/local
+    /usr
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
+)
+
+FIND_LIBRARY(HDF5_HL_LIBRARY
+    NAMES ${HDF5_HL_LIB_NAME}
+    HINTS
+        $ENV{HDF5_DIR}
+        ${HDF5_DIR}
+    PATH_SUFFIXES lib64 lib
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /usr/local
+    /usr
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
+)
+
+
+FIND_LIBRARY(HDF5_DEBUG_LIBRARY
+    NAMES ${HDF5_DEBUG_LIB_NAME}
+    HINTS
+        $ENV{HDF5_DIR}
+        ${HDF5_DIR}
+    PATH_SUFFIXES lib64d libd lib64 lib
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /usr/local
+    /usr
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
+)
+
+FIND_LIBRARY(HDF5_HL_DEBUG_LIBRARY
+    NAMES ${HDF5_HL_DEBUG_LIB_NAME}
+    HINTS
+        $ENV{HDF5_DIR}
+        ${HDF5_DIR}
+    PATH_SUFFIXES lib64d libd lib64 lib
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /usr/local
+    /usr
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
+)
 
 IF ( NOT HDF5_DEBUG_LIBRARY )
     SET ( HDF5_DEBUG_LIBRARY ${HDF5_LIBRARY} )
 ENDIF ( NOT HDF5_DEBUG_LIBRARY )
 
-IF ( NOT HDF5_CPP_DEBUG_LIBRARY )
-    SET ( HDF5_CPP_DEBUG_LIBRARY ${HDF5_CPP_LIBRARY} )
-ENDIF ( NOT HDF5_CPP_DEBUG_LIBRARY )
+IF ( NOT HDF5_HL_DEBUG_LIBRARY )
+    SET ( HDF5_HL_DEBUG_LIBRARY ${HDF5_HL_LIBRARY} )
+ENDIF ( NOT HDF5_HL_DEBUG_LIBRARY )
 
 # Determine the version of the HDF5 libs from H5public.h
 
@@ -192,11 +164,36 @@ ENDIF ( NOT HDF5_VERSION_H_CONTENTS STREQUAL "" )
 
 SET (HDF5_VERSION ${HDF5_VERSION} CACHE INTERNAL "The version number for the HDF5 Libraries" )
 
-IF(HDF5_LIBRARY AND HDF5_DEBUG_LIBRARY AND HDF5_CPP_LIBRARY AND HDF5_CPP_DEBUG_LIBRARY)
-  SET(HDF5_LIBRARIES debug ${HDF5_DEBUG_LIBRARY} ${HDF5_CPP_DEBUG_LIBRARY} optimized ${HDF5_LIBRARY} ${HDF5_CPP_DEBUG_LIBRARY} CACHE STRING "HDF5 Libraries")
-ENDIF()
+IF (HDF5_LIBRARY AND HDF5_DEBUG_LIBRARY)
+  SET (HDF5_LIBRARIES debug ${HDF5_DEBUG_LIBRARY} optimized ${HDF5_LIBRARY} CACHE STRING "HDF5 Libraries")
+
+  GET_FILENAME_COMPONENT (HDF5_LIBRARY_DIR "${HDF5_LIBRARY}" PATH CACHE STRING "HDF5 Library Location")
+  GET_FILENAME_COMPONENT (HDF5_DEBUG_LIBRARY_DIR "${HDF5_DEBUG_LIBRARY}" PATH CACHE STRING "HDF5 Debug Library Location")
+
+ENDIF (HDF5_LIBRARY AND HDF5_DEBUG_LIBRARY)
+
+IF (HDF5_HL_LIBRARY AND HDF5_HL_DEBUG_LIBRARY)
+  SET (HDF5_HL_LIBRARIES debug ${HDF5_HL_DEBUG_LIBRARY} optimized ${HDF5_HL_LIBRARY} CACHE STRING "HDF5 HL Libraries")
+  GET_FILENAME_COMPONENT (HDF5_HL_LIBRARY_DIR "${HDF5_HL_LIBRARY}" PATH CACHE STRING "HDF5 HL Library Location")
+  GET_FILENAME_COMPONENT (HDF5_HL_DEBUG_LIBRARY_DIR "${HDF5_HL_DEBUG_LIBRARY}" PATH CACHE STRING "HDF5 HL Debug Library Location")
+ENDIF (HDF5_HL_LIBRARY AND HDF5_HL_DEBUG_LIBRARY)
+
+IF ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+    SET ( HDF5_LIB_DIR "${HDF5_DEBUG_LIBRARY_DIR}")
+    SET ( HDF5_LIB_PATH "${HDF5_DEBUG_LIBRARY}")
+    SET ( HDF5_HL_LIB_DIR "${HDF5_HL_DEBUG_LIBRARY_DIR}")
+    SET ( HDF5_HL_LIB_PATH "${HDF5_HL_DEBUG_LIBRARY}")
+ELSE ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+    SET ( HDF5_LIB_DIR "${HDF5_LIBRARY_DIR}")
+    SET ( HDF5_LIB_PATH "${HDF5_LIBRARY}")
+    SET ( HDF5_HL_LIB_DIR "${HDF5_HL_LIBRARY_DIR}")
+    SET ( HDF5_HL_LIB_PATH "${HDF5_HL_LIBRARY}")
+ENDIF ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
+
+
 
 INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(HDF5 DEFAULT_MSG HDF5_LIBRARIES HDF5_INCLUDE_DIR)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(HDF5_HL DEFAULT_MSG HDF5_HL_LIBRARIES)
 
 MARK_AS_ADVANCED(HDF5_INCLUDE_DIR HDF5_LIBRARIES)
