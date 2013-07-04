@@ -20,7 +20,7 @@ std::string GetApplicationName();
 
 void AddAppOptions(po::options_description& desc);
 
-int AppMain(int argc, char** argv);
+int AppMain(const po::variables_map& vm);
 
 }
 
@@ -36,6 +36,8 @@ int main(int argc, char** argv)
 
     ns::commonAppInit::CommonAppInit::PopulateCommandLineOptions(options);
 
+    ns::AddAppOptions(options);
+
     po::variables_map vm;
     po::store(
         boost::program_options::parse_command_line(argc, argv, options),
@@ -48,6 +50,8 @@ int main(int argc, char** argv)
         return 0;
     }
 
-    ns::AppMain(argc, argv);
+    ns::commonAppInit::CommonAppInit::Initialise(vm);
+
+    ns::AppMain(vm);
 }
 

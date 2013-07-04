@@ -7,7 +7,8 @@
 
 FIND_PATH(LOG4CPLUS_INCLUDE_DIR log4cplus/logger.h
   HINTS
-  $ENV{LOG4CPLUS_DIR}
+    $ENV{LOG4CPLUS_DIR}
+    ${LOG4CPLUS_DIR}
   PATH_SUFFIXES include
   PATHS
   ~/Library/Frameworks
@@ -23,7 +24,8 @@ FIND_PATH(LOG4CPLUS_INCLUDE_DIR log4cplus/logger.h
 FIND_LIBRARY(LOG4CPLUS_LIBRARY
   NAMES log4cplus log4cplus.lib
   HINTS
-  $ENV{LOG4CPLUS_DIR}
+      $ENV{LOG4CPLUS_DIR}
+      ${LOG4CPLUS_DIR}
   PATH_SUFFIXES lib64 lib
   PATHS
   ~/Library/Frameworks
@@ -47,7 +49,8 @@ IF(MSVC)
   FIND_LIBRARY(LOG4CPLUS_DEBUG_LIBRARY
     NAMES log4cplusD
     HINTS
-    $ENV{LOG4CPLUS_DIR}
+        $ENV{LOG4CPLUS_DIR}
+        ${LOG4CPLUS_DIR}
     PATH_SUFFIXES lib64 lib
     PATHS
     ~/Library/Frameworks

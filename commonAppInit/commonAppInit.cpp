@@ -4,6 +4,7 @@
  **/
 
 #include "commonAppInit/commonAppInit.hpp"
+#include "logging/macros.hpp"
 #include "versioning/version.hxx"
 
 #include <log4cplus/logger.h>
@@ -12,9 +13,11 @@
 
 #include <boost/program_options.hpp>
 
+#include <iostream>
+
 namespace projectnamespace { namespace commonAppInit {
 
-int CommonAppInit::Main(const boost::program_options::variables_map& commandLineArgs)
+int CommonAppInit::Initialise(const boost::program_options::variables_map& commandLineArgs)
 {
     /**
     if (vm.count("help"))
@@ -79,8 +82,9 @@ void CommonAppInit::InitialiseLoggingSystem(
     log4cplus::BasicConfigurator configurator;
     configurator.configure();
 
-    log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG4CPLUS_TEXT("CommonAppInit"));
-    LOG4CPLUS_INFO(logger, LOG4CPLUS_TEXT("Logging system initialised...")); 
+    log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG_TEXT("CommonAppInit"));
+    LOG_INFO(logger, "Logging system initialised..."); 
+    LOG_INFO(logger, "\n" << version::VersionInfo::GetVersionString()); 
 }
 
 bool StartUpAppLayer(const boost::program_options::variables_map& commandLineParams)

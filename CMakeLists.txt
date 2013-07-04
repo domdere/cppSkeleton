@@ -259,10 +259,16 @@ INCLUDE_DIRECTORIES (
 #    ${Boost_LIBRARY_DIRS}
 #    ${Poco_LIBRARY_DIR} )
 
+#SET ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -lpthread -lm -dl -lz -Wl,-rpath,'\$ORIGIN'" )
+SET ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -ggdb -g" )
+
+SET ( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -std=c99 -pedantic -Wall -Wextra -Wundef -Wshadow -Wpointer-arith -Wbad-function-cast -Wcast-qual -Wcast-align -Wwrite-strings -Wconversion -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs -Winline -Wfloat-equal -Wmissing-format-attribute -Wmissing-noreturn -Wpacked -Wdisabled-optimization -Wformat=2 -Wendif-labels -Wdeclaration-after-statement -Wold-style-definition -Winvalid-pch -Wvariadic-macros -Winit-self -Wmissing-include-dirs -Wswitch-default -Wswitch-enum -Wunused-macros -Wunsafe-loop-optimizations -Wc++-compat -Wstrict-overflow -Wlogical-op -Wlarger-than=2048 -Wvla -Wsync-nand -Wframe-larger-than=16384 -Wpacked-bitfield-compat -Wstrict-overflow=5 -Wjump-misses-init -Wunsuffixed-float-constants -Wdouble-promotion -Wsuggest-attribute=const -Wtrampolines -Wstack-usage=8192 -Wvector-operation-performance -O3 -fomit-frame-pointer -finline-functions -floop-parallelize-all -ftree-parallelize-loops=4")
+
 # Sub Projects:
 ADD_SUBPROJECT(appFW)
 ADD_SUBPROJECT(commonUtils)
 ADD_SUBPROJECT(commonAppInit)
+ADD_SUBPROJECT(logging)
 ADD_SUBPROJECT(sampleBinaryProject)
 ADD_SUBPROJECT(systemLayer)
 ADD_SUBPROJECT(versioning)

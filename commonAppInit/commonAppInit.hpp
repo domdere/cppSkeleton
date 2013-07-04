@@ -20,7 +20,7 @@ namespace projectnamespace { namespace commonAppInit {
 class CommonAppInit
 {
 public:
-    static int Main(const boost::program_options::variables_map& commandLineArgs);
+    static int Initialise(const boost::program_options::variables_map& commandLineArgs);
 
     // set up the command-line options to be used by the application.
     static void PopulateCommandLineOptions(
