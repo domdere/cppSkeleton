@@ -82,7 +82,7 @@ void CommonAppInit::InitialiseLoggingSystem(
     log4cplus::BasicConfigurator configurator;
     configurator.configure();
 
-    log4cplus::Logger logger = log4cplus::Logger::getInstance(LOG_TEXT("CommonAppInit"));
+    GET_LOGGER_INSTANCE(logger, CommonAppInit);
     LOG_INFO(logger, "Logging system initialised..."); 
     LOG_INFO(logger, "\n" << version::VersionInfo::GetVersionString()); 
 }

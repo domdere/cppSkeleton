@@ -9,4 +9,6 @@
 
 #define LOG_TEXT LOG4CPLUS_TEXT
 
+#define GET_LOGGER_INSTANCE(instanceName, name) log4cplus::Logger instanceName = log4cplus::Logger::getInstance(LOG_TEXT(#name))
+
 #endif // LOGGING_MACROS_HPP_

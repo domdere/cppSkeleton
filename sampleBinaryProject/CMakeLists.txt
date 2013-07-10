@@ -10,3 +10,5 @@ ADD_EXECUTABLE ( sampleBinaryProject
 TARGET_LINK_LIBRARIES ( sampleBinaryProject
     commonAppInit
     ${Boost_PROGRAM_OPTIONS_LIBRARY} )
+
+LINK_PROFINY ( "sampleBinaryProject" )

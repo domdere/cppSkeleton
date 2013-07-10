@@ -1,4 +1,5 @@
 #include "appFW/consoleAppMain.hpp"
+#include "profiny/profiny.h"
 
 namespace projectnamespace {
 
@@ -13,6 +14,7 @@ std::string GetApplicationName()
 
 int AppMain(const po::variables_map& vm)
 {
+    PROFINY_SCOPE
     return 0;
 }
 

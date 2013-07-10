@@ -28,6 +28,45 @@ INCLUDE ( CheckTypeSize )
 
 SET ( CMAKE_REQUIRED_FLAGS "${CMAKE_CXX_FLAGS}" )
 
+# with profiny, if PROFINY_CALL_GRAPH_PROFILER is defined, its call graph mode is activated,
+# if PROFINY_FLAT_PROFILER is defined, its flat profiler mode is activated,
+# if neither is activated, profiling is off entirely.
+# see https://code.google.com/p/profiny/wiki/WikiProfiny
+#
+OPTION ( CALL_GRAPH_PROFILING "Set to true to activate Profiny Call Graph Profiling" OFF)
+OPTION ( FLAT_PROFILING "Set to true to activate Profiny Call Graph Profiling" OFF)
+
+SET ( PROFILING "OFF" )
+
+IF ( CALL_GRAPH_PROFILING AND FLAT_PROFILING )
+
+    MESSAGE ( FATAL_ERROR "Cannot have both Call Graph Profiling and Flat Profiling Enabled, choose one.")
+
+ENDIF ( CALL_GRAPH_PROFILING AND FLAT_PROFILING )
+
+IF ( CALL_GRAPH_PROFILING )
+
+    MESSAGE ( STATUS "Enabling Call Graph Profiling.." )
+    ADD_DEFINITIONS ( -DPROFINY_CALL_GRAPH_PROFILER )
+    SET ( PROFILING "ON" )
+
+ENDIF ( CALL_GRAPH_PROFILING )
+
+IF ( FLAT_PROFILING )
+
+    MESSAGE ( STATUS "Enabling Flat Profiling.." )
+    ADD_DEFINITIONS ( -DPROFINY_FLAT_PROFILER )
+    SET ( PROFILING "ON" )
+
+ENDIF ( FLAT_PROFILING )
+
+# Note that profiny has link requirements, requires boost::system and boost::timer
+MACRO ( LINK_PROFINY projectName )
+    IF ( PROFILING STREQUAL "ON" )
+        TARGET_LINK_LIBRARIES ( ${projectName} ${Boost_SYSTEM_LIBRARY} ${Boost_TIMER_LIBRARY} )
+    ENDIF ( PROFILING STREQUAL "ON" )
+ENDMACRO ( LINK_PROFINY projectName )
+
 CHECK_TYPE_SIZE ( "void*" PTR_SIZE )
 
 IF ( PTR_SIZE EQUAL 4 )
@@ -176,7 +215,7 @@ IF ( CMAKE_COMPILER_IS_GNUCXX )
     SET ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall" )
 ENDIF ( CMAKE_COMPILER_IS_GNUCXX )
 
-FIND_PACKAGE ( Boost REQUIRED COMPONENTS date_time thread unit_test_framework program_options)
+FIND_PACKAGE ( Boost REQUIRED COMPONENTS date_time thread unit_test_framework program_options system timer )
 
 IF ( Boost_FOUND )
     MESSAGE ( STATUS "Boost includes were found at: ${Boost_INCLUDE_DIR}" )
@@ -281,6 +320,7 @@ ADD_SUBPROJECT(appFW)
 ADD_SUBPROJECT(commonUtils)
 ADD_SUBPROJECT(commonAppInit)
 ADD_SUBPROJECT(logging)
+ADD_SUBPROJECT(profiny)
 ADD_SUBPROJECT(sampleBinaryProject)
 ADD_SUBPROJECT(systemLayer)
 ADD_SUBPROJECT(versioning)
