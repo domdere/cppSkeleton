@@ -5,6 +5,7 @@
 #include <log4cplus/loggingmacros.h>
 
 #define LOG_INFO LOG4CPLUS_INFO 
+#define LOG_DEBUG LOG4CPLUS_DEBUG
 #define LOG_ERROR LOG4CPLUS_ERROR
 
 #define LOG_TEXT LOG4CPLUS_TEXT

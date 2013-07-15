@@ -1,5 +1,5 @@
 #include "appFW/consoleAppMain.hpp"
-#include "profiny/profiny.h"
+#include "profiny/profiny.hpp"
 
 namespace projectnamespace {
 
