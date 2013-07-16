@@ -63,7 +63,7 @@ ENDIF ( FLAT_PROFILING )
 # Note that profiny has link requirements, requires boost::system and boost::timer
 MACRO ( LINK_PROFINY projectName )
     IF ( PROFILING STREQUAL "ON" )
-        TARGET_LINK_LIBRARIES ( ${projectName} ${Boost_SYSTEM_LIBRARY} ${Boost_TIMER_LIBRARY} )
+        TARGET_LINK_LIBRARIES ( ${projectName} ${Boost_SYSTEM_LIBRARY} ${Boost_TIMER_LIBRARY} profiny )
     ENDIF ( PROFILING STREQUAL "ON" )
 ENDMACRO ( LINK_PROFINY projectName )
 

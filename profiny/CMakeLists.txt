@@ -1,2 +1,2 @@
 ADD_LIBRARY ( profiny
-    profiny.c profiny.h profiny.hpp )
+    profiny.cpp profiny.h profiny.hpp )

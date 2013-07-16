@@ -388,8 +388,6 @@ namespace profiny
 
 	/**********************************************************************/
 
-	boost::intrusive_ptr<Profiler> Profiler::m_instance = NULL;
-
 	inline Profiler::Profiler()
 #ifdef PROFINY_CALL_GRAPH_PROFILER
 		: m_omitRecursiveCalls(true)
