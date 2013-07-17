@@ -13,7 +13,7 @@ namespace boost
     {
         class variables_map;
     }
-};
+}
 
 namespace projectnamespace { namespace commonAppInit {
 

@@ -77,7 +77,7 @@ bool CommonAppInit::HandleCommonOptions(
 // logging is a non-platform specific system that all applications will expect
 // to be setup..
 void CommonAppInit::InitialiseLoggingSystem(
-    const boost::program_options::variables_map& commandLineArgs)
+    const boost::program_options::variables_map& /*commandLineArgs*/)
 {
     log4cplus::BasicConfigurator configurator;
     configurator.configure();
@@ -87,7 +87,7 @@ void CommonAppInit::InitialiseLoggingSystem(
     LOG_INFO(logger, "\n" << version::VersionInfo::GetVersionString()); 
 }
 
-bool StartUpAppLayer(const boost::program_options::variables_map& commandLineParams)
+bool CommonAppInit::StartUpAppLayer(const boost::program_options::variables_map& /*commandLineParams*/)
 {
     // TODO: create the app layer and run its Setup method.
     return true;

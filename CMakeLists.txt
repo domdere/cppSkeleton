@@ -279,15 +279,17 @@ IF ( USE_GIT_FOR_VERSIONING )
 ENDIF ( USE_GIT_FOR_VERSIONING )
 
 # Main include directories:
-INCLUDE_DIRECTORIES (
-    ${ROOT_SRC_DIR}
-    ${ROOT_BIN_DIR}
+INCLUDE_DIRECTORIES ( SYSTEM
     ${Boost_INCLUDE_DIR}
     ${Poco_INCLUDE_DIR}
     ${Json_Spirit_INCLUDE_DIR}
     ${SOCI_INCLUDE_DIR}
     ${LOG4CPLUS_INCLUDE_DIR}
     ${HDF5_INCLUDE_DIR} )
+
+INCLUDE_DIRECTORIES (
+    ${ROOT_SRC_DIR}
+    ${ROOT_BIN_DIR} )
 
 # I don't include ${Poco_BINARY_DIR} in the link directories because on linux it seems to get set
 # to the include dir...
