@@ -206,9 +206,16 @@ MESSAGE ( STATUS "Boost: " )
 # Disable auto linking, its a bit of a pain in windows.
 ADD_DEFINITIONS ( -DBOOST_ALL_NO_LIB )
 
+
 # want to use static boost libs?
 IF (WIN32)
     SET ( Boost_USE_STATIC_LIBS ON )
+
+ELSE (WIN32)
+    
+    # Using the Boost dynamic libs.
+    ADD_DEFINITIONS ( -DBOOST_TEST_DYN_LINK )
+
 ENDIF (WIN32)
 
 IF ( CMAKE_COMPILER_IS_GNUCXX )
