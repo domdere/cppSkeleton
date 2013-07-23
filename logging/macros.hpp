@@ -15,6 +15,10 @@
 
     #define GET_LOGGER_INSTANCE(instanceName, name) log4cplus::Logger instanceName = log4cplus::Logger::getInstance(LOG_TEXT(#name))
 
+    #define MEMBER_LOGGER_INSTANCE(instanceName) log4cplus::Logger instanceName
+
+    #define INITIALISE_LOGGER_MEMBER_INSTANCE(instanceName, name) instanceName = log4cplus::Logger::getInstance(LOG_TEXT(#name))
+
     #define INITIALISE_LOGGING_BASIC log4cplus::BasicConfigurator; configurator.configure();
 
 #else // NO_LOGGING
@@ -26,6 +30,10 @@
     #define LOG_TEXT
 
     #define GET_LOGGER_INSTANCE(instanceName, name)
+
+    #define MEMBER_LOGGER_INSTANCE(instanceName)
+
+    #define INITIALISE_LOGGER_MEMBER_INSTANCE(instanceName, name)
 
     #define INITIALISE_LOGGING_BASIC
 
