@@ -24,7 +24,6 @@ MonoidAccumulator mapreduce(
 {
     if (numThreads == 1u)
     {
-        std::cout << "transforming.." << std::endl;
         return std::transform(begin, end, zero, f);
     }
 
@@ -46,9 +45,9 @@ MonoidAccumulator mapreduce(
         const auto firstThreadHalf = numThreads / 2;
         const auto secondThreadHalf = numThreads - firstThreadHalf;
 
-        std::cout << "forking a thread..." << std::endl;
         iterator_type const midPoint = begin + (length / 2);
         std::future<MonoidAccumulator> secondHalf = std::async(
+            std::launch::async,
             &mapreduce<InputIterator, MonoidAccumulator, UnaryOperation>,
             midPoint,
             end,
@@ -57,7 +56,6 @@ MonoidAccumulator mapreduce(
             secondThreadHalf, 
             minPerThread);
 
-        std::cout << "handling the rest..." << std::endl;
         const auto firstResult = mapreduce<InputIterator, MonoidAccumulator, UnaryOperation>(
             begin,
             midPoint,

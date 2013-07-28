@@ -41,6 +41,7 @@ void transform(
 
         iterator_type const midPoint = first + (length / 2);
         std::future<void> firstHalf = std::async(
+            std::launch::async,
             &transform<RangeType, OutputIterator, UnaryOperation>,
             RangeType(first, midPoint),
             outIter,
