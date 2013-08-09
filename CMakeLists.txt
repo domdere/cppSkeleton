@@ -67,6 +67,21 @@ MACRO ( LINK_PROFINY projectName )
     ENDIF ( PROFILING STREQUAL "ON" )
 ENDMACRO ( LINK_PROFINY projectName )
 
+OPTION ( NO_LOGGING "Set to true to compile out any Logging statements" OFF)
+
+IF ( NO_LOGGING )
+
+    ADD_DEFINITIONS ( -DNO_LOGGING )
+
+ENDIF ( NO_LOGGING )
+
+MACRO ( LINK_LOGGING projectName )
+    IF ( NOT NO_LOGGING )
+        TARGET_LINK_LIBRARIES ( ${projectName} ${LOG4CPLUS_LIBRARIES} )
+    ENDIF ( NOT NO_LOGGING )
+ENDMACRO ( LINK_LOGGING projectName )
+
+
 CHECK_TYPE_SIZE ( "void*" PTR_SIZE )
 
 IF ( PTR_SIZE EQUAL 4 )

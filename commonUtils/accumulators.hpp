@@ -1,5 +1,3 @@
-#include "commonUtils/monoid.hpp"
-
 namespace projectnamespace { namespace commonutils { namespace accumulators {
 
 template <typename T>

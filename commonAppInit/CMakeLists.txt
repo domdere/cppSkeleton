@@ -3,6 +3,7 @@ ADD_LIBRARY( commonAppInit
 
 TARGET_LINK_LIBRARIES( commonAppInit
     versioning
-    ${LOG4CPLUS_LIBRARIES}
     ${Boost_PROGRAM_OPTIONS_LIBRARY}
     ${MiscLib} )
+
+LINK_LOGGING( "commonAppInit" )
