@@ -113,6 +113,12 @@ Ubuntu/Linux:
 
 for windows, the ones you want are: Net, Util, XML and Foundation
 
+# Additional Documentation
+
+-   **[Adding Unit Tests] [unit-tests]**
+
 # Licensing
 
 This template project is *PublicDomain*
+
+[unit-tests]: docs/AddingUnitTests.md "Adding Unit Tests"
