@@ -339,10 +339,28 @@ IF ( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
 
 ENDIF ( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
 
+# setup the unit test target
+ADD_CUSTOM_TARGET ( run-tests
+    COMMENT "Runs all the unit tests" )
+
+# adds the given project as a dependency for the "run-tests" target
+MACRO ( REGISTER_UNIT_TESTS projectName )
+
+    ADD_CUSTOM_TARGET ( run-${projectName}
+        COMMAND ${projectName}
+        DEPENDS ${projectName}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Runs the ${projectName} unit tests." )
+
+    ADD_DEPENDENCIES ( run-tests run-${projectName} )
+
+ENDMACRO ( REGISTER_UNIT_TESTS projectName )
+
 # Sub Projects:
 ADD_SUBPROJECT(appFW)
 ADD_SUBPROJECT(commonUtils)
 ADD_SUBPROJECT(commonAppInit)
+ADD_SUBPROJECT(emptyTest)
 ADD_SUBPROJECT(logging)
 ADD_SUBPROJECT(parallel)
 ADD_SUBPROJECT(profiny)

@@ -112,3 +112,7 @@ Ubuntu/Linux:
 `sudo make install` installs the libraries fine on ubuntu,
 
 for windows, the ones you want are: Net, Util, XML and Foundation
+
+# Licensing
+
+This template project is *PublicDomain*
