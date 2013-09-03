@@ -383,65 +383,65 @@ def buildCxxOutput(
     result += '\n'
     result += 'const std::string VersionInfo::GetVersionString()\n'
     result += '{\n'
-    result += '    std::string border(\"-------------------------------------------------------------\\n\");\n'
+    result += '    std::string border(\"-------------------------------------------------------------\\\\n\");\n'
     result += '    std::stringstream result;\n'
     result += '\n'
     result += '    result << border;\n'
     result += '\n'
-    result += '    result << \"Version Info: \\n\";\n'
+    result += '    result << \"Version Info: \\\\n\";\n'
     result += '\n'
 
     if buildType != None:
-        result += '    result << \"    Build Type: \" << VersionInfo::BuildType() << \'\\n\';\n'
+        result += '    result << \"    Build Type: \" << VersionInfo::BuildType() << \'\\\\n\';\n'
 
-    result += '    result << \'\\n\';\n'
+    result += '    result << \'\\\\n\';\n'
     result += '\n'
 
-    result += '    result << \"Git Version Info: \\n\";\n'
+    result += '    result << \"Git Version Info: \\\\n\";\n'
     result += '\n'
     
     if gitRevId != None:
-        result += '    result << \"    Git Rev Id: \" << VersionInfo::GitRevID() << \'\\n\';\n'
+        result += '    result << \"    Git Rev Id: \" << VersionInfo::GitRevID() << \'\\\\n\';\n'
 
     if gitBranch != None:
-        result += '    result << \"    Git Branch: \" << VersionInfo::GitBranch() << \'\\n\';\n'
+        result += '    result << \"    Git Branch: \" << VersionInfo::GitBranch() << \'\\\\n\';\n'
 
     if gitBuildUser != None:
-        result += '    result << \"    Git Build User: \" << VersionInfo::GitBuildUser() << \'\\n\';\n'
+        result += '    result << \"    Git Build User: \" << VersionInfo::GitBuildUser() << \'\\\\n\';\n'
 
-    result += '    result << \'\\n\';\n'
-    result += '    result << \"Library Version Information:\\n\";\n'
+    result += '    result << \'\\\\n\';\n'
+    result += '    result << \"Library Version Information:\\\\n\";\n'
 
     if boostVersion != None:
-        result += '    result << \"    Boost Version: \" << VersionInfo::BoostVersion() << \'\\n\';\n'
+        result += '    result << \"    Boost Version: \" << VersionInfo::BoostVersion() << \'\\\\n\';\n'
 
     if hdf5Version != None:
-        result += '    result << \"    HDF5 Version: \" << VersionInfo::HDF5Version() << \'\\n\';\n'
+        result += '    result << \"    HDF5 Version: \" << VersionInfo::HDF5Version() << \'\\\\n\';\n'
 
     if jsonSpiritVersion != None:
-        result += '    result << \"    Json Spirit Version: \" << VersionInfo::JsonSpiritVersion() << \'\\n\';\n'
+        result += '    result << \"    Json Spirit Version: \" << VersionInfo::JsonSpiritVersion() << \'\\\\n\';\n'
 
     if log4cplusVersion != None:
-        result += '    result << \"    Log4cplus Version: \" << VersionInfo::Log4CplusVersion() << \'\\n\';\n'
+        result += '    result << \"    Log4cplus Version: \" << VersionInfo::Log4CplusVersion() << \'\\\\n\';\n'
 
     if sociVersion != None:
-        result += '    result << \"    Soci Version: \" << VersionInfo::SociVersion() << \'\\n\';\n'
+        result += '    result << \"    Soci Version: \" << VersionInfo::SociVersion() << \'\\\\n\';\n'
 
     if pocoVersion != None:
-        result += '    result << \"    Poco Version: \" << VersionInfo::PocoVersion() << \'\\n\';\n'
+        result += '    result << \"    Poco Version: \" << VersionInfo::PocoVersion() << \'\\\\n\';\n'
 
-    result += '    result << \'\\n\';\n'
+    result += '    result << \'\\\\n\';\n'
 
-    result += '    result << \"Compiler Information:\\n\";\n'
+    result += '    result << \"Compiler Information:\\\\n\";\n'
 
     if compilerName != None:
-        result += '    result << \"    Compiler: \" << VersionInfo::CompilerName() << \'\\n\';\n'
+        result += '    result << \"    Compiler: \" << VersionInfo::CompilerName() << \'\\\\n\';\n'
 
     if compilerVersion != None:
-        result += '    result << \"    Compiler Version: \" << VersionInfo::CompilerVersion() << \'\\n\';\n'
+        result += '    result << \"    Compiler Version: \" << VersionInfo::CompilerVersion() << \'\\\\n\';\n'
 
     if cFlags != None:
-        result += '    result << \"    Compiler Flags: \" << VersionInfo::CFlags() << \'\\n\';\n'
+        result += '    result << \"    Compiler Flags: \" << VersionInfo::CFlags() << \'\\\\n\';\n'
 
     result += '\n'
     result += '    result << border;\n'
