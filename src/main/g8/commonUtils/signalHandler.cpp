@@ -1,6 +1,6 @@
 #include "commonUtils/signalHandler.hpp"
 
-namespace projectname { namespace commonutils {
+namespace $root_namespace;format="camel,lower"$ { namespace commonutils {
 
 void SignalHandler::CommonHandler(int signal)
 {

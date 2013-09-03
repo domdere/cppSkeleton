@@ -3,4 +3,4 @@ ADD_LIBRARY( AppFW
     consoleAppMain.hpp )
 
 TARGET_LINK_LIBRARIES( AppFW
-    ${MiscLib} )
+    \${MiscLib} )

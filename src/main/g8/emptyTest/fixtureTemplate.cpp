@@ -1,6 +1,6 @@
 #include "emptyTest/fixtureTemplate.hpp"
 
-namespace projectnamespace { namespace libname { namespace sublibname { namespace test {
+namespace $root_namespace;format="camel,lower"$ { namespace libname { namespace sublibname { namespace test {
 
 FixtureTemplate::FixtureTemplate()
 {
@@ -12,4 +12,4 @@ FixtureTemplate::~FixtureTemplate()
     // Tear down for the test suite goes here.
 }
 
-}}}} // namespace projectnamespace { namespace libname { namespace sublibname { namespace test {
+}}}} // namespace $root_namespace;format="camel,lower"$ { namespace libname { namespace sublibname { namespace test {

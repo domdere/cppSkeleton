@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace projectnamespace {
+namespace $root_namespace;format="camel,lower"$ {
 
 void AddAppOptions(po::options_description& desc)
 {
@@ -11,7 +11,7 @@ void AddAppOptions(po::options_description& desc)
 
 std::string GetApplicationName()
 {
-    return "sampleBinaryProject";
+    return "$executable_name;format="camel"$";
 }
 
 int AppMain(const po::variables_map& vm)

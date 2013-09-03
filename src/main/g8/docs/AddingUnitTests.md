@@ -17,7 +17,7 @@ le target called `run-tests` in addition to adding a specific target to run the 
 
             # Unit test suites need to be linked to the boost unit test framework
             TARGET_LINK_LIBRARIES ( emptyTest
-                ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
+                \${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
 
     -   `emptyTest/emptyTests.cpp`:
         -   One file like this for each test suite would be recommended

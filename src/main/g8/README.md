@@ -54,11 +54,11 @@ Currently trialling with version **4.05** (it generally seems pretty stable, cha
 
 Made a minor change to the CMakeList, it wasn't copying over the json_spirit_writer_options.h file over so i added it to the install:
 
-    $ diff CMakeLists.txt.old CMakeLists.txt
+    \$ diff CMakeLists.txt.old CMakeLists.txt
     18c18,19
     <   DESTINATION include)
     ---
-    >   ${CMAKE_SOURCE_DIR}/json_spirit/json_spirit_writer_options.h
+    >   \${CMAKE_SOURCE_DIR}/json_spirit/json_spirit_writer_options.h
     >   DESTINATION include)
 
 ## log4cplus

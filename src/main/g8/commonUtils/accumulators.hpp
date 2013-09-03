@@ -1,4 +1,7 @@
-namespace projectnamespace { namespace commonutils { namespace accumulators {
+#ifndef COMMONUTILS_ACCUMULATORS_HPP__
+#define COMMONUTILS_ACCUMULATORS_HPP__
+
+namespace $root_namespace;format="camel,lower"$ { namespace commonutils { namespace accumulators {
 
 template <typename T>
 class MonoidSum
@@ -41,4 +44,6 @@ private:
     T mSum;
 };
 
-}}} // namespace projectnamespace { namespace commonutils { namespace accumulators {
+}}} // namespace $root_namespace;format="camel,lower"$ { namespace commonutils { namespace accumulators {
+
+#endif // COMMONUTILS_ACCUMULATORS_HPP__

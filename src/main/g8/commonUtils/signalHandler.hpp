@@ -3,7 +3,7 @@
 
 #include <boost/function.hpp>
 
-namespace projectname { namespace commonutils {
+namespace $root_namespace;format="camel,lower"$ { namespace commonutils {
 
 class SignalHandler 
 {

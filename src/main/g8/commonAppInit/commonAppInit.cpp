@@ -15,7 +15,7 @@
 
 #include <iostream>
 
-namespace projectnamespace { namespace commonAppInit {
+namespace $root_namespace;format="camel,lower"$ { namespace commonAppInit {
 
 int CommonAppInit::Initialise(const boost::program_options::variables_map& commandLineArgs)
 {

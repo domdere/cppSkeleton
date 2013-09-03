@@ -17,7 +17,7 @@ namespace boost
     }
 }
 
-namespace projectnamespace { namespace systemlayer {
+namespace $root_namespace;format="camel,lower"$ { namespace systemlayer {
 
 namespace commonUtils
 {

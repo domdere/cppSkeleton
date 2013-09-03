@@ -88,7 +88,7 @@ and REPO_PATH is the path to the repo from which the build is being made, if not
 
     projectOpts = OptionGroup(parser, "Project Options")
 
-    projectOpts.add_option('--namespace', type='string', dest='namespace', default='projectnamespace',
+    projectOpts.add_option('--namespace', type='string', dest='namespace', default='$root_namespace;format="camel,lower"$',
         help='The namespace to put the versioning stuff in [default=\'%default\']',
         metavar='namespace')
 

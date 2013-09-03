@@ -12,7 +12,7 @@
 
 namespace po = boost::program_options;
 
-namespace projectnamespace {
+namespace $root_namespace;format="camel,lower"$ {
 
 // All apps might use a standard output for "-h", so it would be handy for each app to have a
 // name defined to insert in that output.
@@ -26,13 +26,13 @@ int AppMain(const po::variables_map& vm);
 
 int main(int argc, char** argv)
 {
-    namespace ns = projectnamespace;
+    namespace ns = $root_namespace;format="camel,lower"$;
 
     // for now all this does is call a main function that the app will define,
     // but eventually i may get all the system level initialisation to occur inside
     // one class and call that instead, with the app plugging into that class.
 
-    po::options_description options(projectnamespace::GetApplicationName());
+    po::options_description options($root_namespace;format="camel,lower"$::GetApplicationName());
 
     ns::commonAppInit::CommonAppInit::PopulateCommandLineOptions(options);
 

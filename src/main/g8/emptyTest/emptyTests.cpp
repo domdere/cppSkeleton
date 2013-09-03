@@ -3,7 +3,7 @@
 #include <boost/test/unit_test.hpp>
 
 
-namespace projectnamespace { namespace libname { namespace sublibname { namespace test {
+namespace $root_namespace;format="camel,lower"$ { namespace libname { namespace sublibname { namespace test {
 
 // First arg is the name of the suite.
 // Second arg is the name of the Fixture class
@@ -21,4 +21,4 @@ BOOST_AUTO_TEST_CASE(TestCase)
 
 BOOST_AUTO_TEST_SUITE_END()
 
-}}}} // namespace projectnamespace { namespace libname { namespace sublibname { namespace test {
+}}}} // namespace $root_namespace;format="camel,lower"$ { namespace libname { namespace sublibname { namespace test {

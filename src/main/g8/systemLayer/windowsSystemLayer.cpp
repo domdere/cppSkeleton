@@ -1,7 +1,7 @@
 #include "commonUtils/signalHandler.hpp"
 #include "systemLayer/systemLayer.hpp"
 
-namespace projectnamespace { namespace systemlayer {
+namespace $root_namespace;format="camel,lower"$ { namespace systemlayer {
 
 void SystemLayer::SetSignalHandler(commonUtils::SignalHandler& signalHandler)
 {

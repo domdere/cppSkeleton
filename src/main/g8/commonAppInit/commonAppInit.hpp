@@ -15,7 +15,7 @@ namespace boost
     }
 }
 
-namespace projectnamespace { namespace commonAppInit {
+namespace $root_namespace;format="camel,lower"$ { namespace commonAppInit {
 
 class CommonAppInit
 {

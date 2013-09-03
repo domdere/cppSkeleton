@@ -3,7 +3,7 @@ ADD_LIBRARY( commonAppInit
 
 TARGET_LINK_LIBRARIES( commonAppInit
     versioning
-    ${Boost_PROGRAM_OPTIONS_LIBRARY}
-    ${MiscLib} )
+    \${Boost_PROGRAM_OPTIONS_LIBRARY}
+    \${MiscLib} )
 
 LINK_LOGGING( "commonAppInit" )

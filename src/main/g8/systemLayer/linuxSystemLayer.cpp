@@ -3,7 +3,7 @@
 
 #include <pthread.h>
 
-namespace projectnamespace { namespace systemlayer {
+namespace $root_namespace;format="camel,lower"$ { namespace systemlayer {
 
 void SystemLayer::SetSignalHandler(commonUtils::SignalHandler& signalHandler)
 {

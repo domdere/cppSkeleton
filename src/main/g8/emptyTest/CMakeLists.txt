@@ -5,7 +5,7 @@ ADD_EXECUTABLE ( emptyTest
 
 # Unit test suites need to be linked to the boost unit test framework
 TARGET_LINK_LIBRARIES ( emptyTest
-    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
+    \${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
 
 # this registers the test suite to be run as part of the run-tests target
 # it also adds a "run-emptyTest" target that specifically only runs these tests.
